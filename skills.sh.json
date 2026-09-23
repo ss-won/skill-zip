@@ -5,7 +5,10 @@
     {
       "title": "Personal",
       "description": "Everyday helpers tuned to how I work and think.",
-      "skills": ["decision-buddy"]
+      "skills": [
+        "option-finder",
+        "decision-buddy"
+      ]
     }
   ]
 }

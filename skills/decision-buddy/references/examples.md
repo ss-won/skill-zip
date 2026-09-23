@@ -1,6 +1,6 @@
 # Worked examples
 
-Conversations showing pacing in each mode, an open gift request, plus a settings change. They illustrate the *shape*, not a script — adapt the questions to the actual decision.
+Conversations showing pacing in each mode, plus a settings change. They illustrate the *shape*, not a script — adapt the questions to the actual decision.
 
 ---
 
@@ -94,36 +94,7 @@ Note how round 2 targets the gap between stated priorities and gut lean — that
 
 ---
 
-## 4. 적당히 — open gift request (no candidates yet)
-
-**User:** 친구 생일 선물 추천해줘. 5만원 정도. 친구는 게임회사 PM이야
-
-**Assistant:** [clickable choice tool — mode hint inside the first question because text before a tool call may not be shown]
-> 1. 🙂 몇 가지만 여쭤볼게요 (바로 원하면 "그냥 골라줘") — 친구 평일은 어떤 편이에요? (a) 회의 많고 하루 종일 모니터 앞 (b) 야근·크런치 잦음 (c) 잘 모르겠음
-> 2. 친구가 이미 갖고 있을 법한 건? (a) 좋은 키보드·마우스 (b) 게임기 (c) 잘 모르겠음
-> 3. 생일이 언제예요? (a) 이번 주 (b) 다음 주 이후
-
-Why this shape: no candidates were given, so it still runs (open recommendation). The volunteered detail — 게임회사 PM — is the strongest signal, so questions build on it (their day, what they already own) instead of generic "취향" questions. Price is low but a person is involved, so auto mode is 적당히, not 빠르게. The birthday date is asked because it changes the next step.
-
-**User:** 1a 2a 3a, 금요일이야
-
-**Assistant:**
-> ✅ **추천: 목·어깨 마사지기**
->
-> | 기준 | 마사지기 | 드립백 세트 | 블루라이트 안경 |
-> |---|---|---|---|
-> | 모니터 앞 하루에 도움 ★★★ | 5 | 3 | 4 |
-> | 이미 가졌을 확률 낮음 ★★ | 4 | 4 | 3 |
-> | 5만원 안 ★ | 4 | 5 | 5 |
-> | **점수** | **27** | 22 | 23 |
->
-> 왜: 회의 많고 하루 종일 모니터 앞이면 제일 매일 체감되고, 키보드·마우스처럼 이미 있을 확률도 낮아요.
-> 이럴 땐 다른 쪽: 친구가 커피를 꼭 챙겨 마시는 편이면 → 드립백 세트 / 안경을 이미 쓰는 친구면 → 블루라이트 안경은 빼기
-> 지금 할 일: 생일이 금요일이라 **오늘 안에 새벽·당일 배송 되는 걸로 주문**하세요. 내일 주문하면 금요일 도착이 빠듯해요.
-
----
-
-## 5. Changing the default ("설정")
+## 4. Changing the default ("설정")
 
 **User:** 앞으로 나한텐 질문 좀 줄여줘. 매번 묻는 거 귀찮아
 

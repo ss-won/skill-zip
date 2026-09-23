@@ -159,6 +159,18 @@
         "Next step accounts for the 10/1 deadline and the holiday",
         "Final answer commits to exactly one gift"
       ]
+    },
+    {
+      "id": 12,
+      "name": "no-options-boundary",
+      "prompt": "주말에 뭐 하지",
+      "persona": "personas/weekend.md",
+      "expected_output": "후보가 없으면 긴 목록/질문 라운드 대신 후보를 묻고 '추천해줘' 경로를 안내.",
+      "expectations": [
+        "Does not start a question round or build a table",
+        "Asks what options they're considering in one short reply",
+        "Mentions they can say '추천해줘' to get ideas first"
+      ]
     }
   ]
 }

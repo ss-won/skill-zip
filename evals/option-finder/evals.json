@@ -1,0 +1,46 @@
+{
+  "skill_name": "option-finder",
+  "evals": [
+    {
+      "id": 1,
+      "name": "friend-gift",
+      "prompt": "친구 생일 선물 추천해줘. 5만원 정도. 친구는 게임회사 PM이야",
+      "persona": "personas/friend-gift.md",
+      "expectations": [
+        "Gives 3-4 options (not more)",
+        "Options are of clearly different kinds",
+        "Each option has a one-line reason tied to this person (e.g. PM / monitor-heavy day)",
+        "Includes a practical detail per option (price range, time, etc.)",
+        "Asks at most one question before giving options",
+        "Does not give a scoring table or a single final pick",
+        "Ends with a handoff line inviting '골라줘' or '다른 거'"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "weekend",
+      "prompt": "이번 토요일 뭐하지… 아무것도 못 정하겠어",
+      "persona": "personas/weekend.md",
+      "expectations": [
+        "Gives 3-4 options (not more)",
+        "Options are of clearly different kinds",
+        "Asks at most one question before giving options",
+        "Does not give a scoring table or a single final pick",
+        "Ends with a handoff line inviting '골라줘' or '다른 거'"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "housewarming-missing-info",
+      "prompt": "집들이 선물 뭐 사지?",
+      "persona": "personas/housewarming.md",
+      "expectations": [
+        "Asks exactly one short question (or states an assumption) instead of a long questionnaire",
+        "Gives 3-4 options (not more) after the answer",
+        "Each option has a one-line reason tied to what was learned",
+        "Does not give a scoring table or a single final pick",
+        "Ends with a handoff line inviting '골라줘' or '다른 거'"
+      ]
+    }
+  ]
+}

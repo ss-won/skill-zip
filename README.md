@@ -6,7 +6,10 @@ Personal, agent-agnostic skills — packaged in the open [Agent Skills](https://
 
 | Skill | What it does | Status |
 |---|---|---|
-| [`decision-buddy`](skills/decision-buddy/SKILL.md) | 추천 + 결정 도우미 — 후보가 없으면 2~4개 추천안을 먼저 주고, 있으면 그 중에서. 쉬운 객관식 질문 몇 개 → ✅ 추천 + 점수표. 모드: ⚡빠르게 / 🙂적당히 / 🔍꼼꼼히 (말로 바꾸거나 "설정"). | active |
+| [`option-finder`](skills/option-finder/SKILL.md) | 후보가 없을 때 — "추천해줘"에 나한테 맞는 추천안 3~4개(서로 다른 종류, 한 줄 이유 + 가격/시간). 고르기는 다음 스킬로 넘김. | active |
+| [`decision-buddy`](skills/decision-buddy/SKILL.md) | 후보가 있을 때 — 쉬운 객관식 질문 몇 개 → ✅ 추천 + 점수표 → "이럴 땐 다른 쪽". 모드: ⚡빠르게 / 🙂적당히 / 🔍꼼꼼히 (말로 바꾸거나 "설정"). | active |
+
+`option-finder` → "골라줘" → `decision-buddy` 순서로 자연스럽게 이어져요. 둘 다 따로 설치해도 혼자서 동작해요.
 
 ## Install
 

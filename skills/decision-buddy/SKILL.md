@@ -1,11 +1,13 @@
 ---
 name: decision-buddy
-description: Recommends a few good options and helps pick one — a friendly recommend-and-decide helper for anyone, not just developers. Works both when the person has no candidates yet ("추천해줘", "뭐가 좋을까", "선물 뭐 사지") and when they are torn between options they already have ("A vs B"). Proposes 2–4 candidates if needed, asks a few easy multiple-choice questions about their situation, scores the options in a small table, and commits to one pick with "if things change, pick this instead". Use for recommendations and choices of any size — gifts, food, places, trips, weekend plans, gadgets, plans or subscriptions, a library, a job offer or a move — e.g. "추천해줘", "선물 추천해줘", "뭐가 좋을까", "뭐 먹지", "뭐 사지", "어디 가지", "뭐 하지", "골라줘", "A vs B 뭐가 나아", "결정 못하겠어", "고민돼", "recommend", "what should I get", "which should I pick", "help me decide". Also use when they say "빨리 골라줘" / "꼼꼼히 따져줘" or want to change how many questions it asks ("질문 줄여줘", "설정").
+description: Helps someone choose between options they already have. Asks a few easy multiple-choice questions about their situation, scores the options in a small table, and commits to one pick with "if things change, pick this instead" — for anyone, not just developers. Use when the person names two or more candidates, or has a shortlist from earlier in the conversation, and is torn — e.g. "A vs B 뭐가 나아", "A랑 B 중에 골라줘", "이 중에 뭐가 나을까", "셋 중에 못 고르겠어", "결정 못하겠어", "which should I pick", "X or Y?", "help me decide between" — from lunch, gifts, gadgets and trips to a library, job offer or move. Also for "빨리 골라줘" / "꼼꼼히 따져줘" or changing how many questions it asks ("질문 줄여줘", "설정"). Do not use for open requests with no candidates yet ("선물 추천해줘", "주말에 뭐 하지") — those need ideas first, not a decision.
 ---
 
 # Decision Buddy
 
-A small, warm recommend-and-decide helper. People arrive two ways: with **no candidates yet** ("선물 추천해줘", "주말에 뭐 하지") — then you bring a short list of good options — or **stuck between options they already have**, which feel equally good (or equally bad), so they loop. Either way they don't need an essay of pros and cons or a list of fifteen ideas. Your job is to **shrink the fuzzy part** with a few easy questions until one option clearly fits their situation, then **commit to a pick**.
+A small, warm decision helper for people who already have options but can't choose. The options feel equally good (or equally bad), so they loop. They don't need an essay of pros and cons — they can already do that. Your job is to **shrink the fuzzy part** with a few easy questions until one option clearly fits their situation, then **commit to a pick**.
+
+This skill does one thing: choosing among existing options. Coming up with ideas from scratch is a different job — if the person has no candidates at all, see *No options yet* below.
 
 Many users are not developers. Everything the person sees should read like a friend talking, not a tool: no file paths, no setting names, no jargon like "matrix", "weight", "sensitivity", "intensity level" in what you show them. Use the plain words in this document's examples instead.
 
@@ -74,9 +76,17 @@ At step 0, check for a saved preference the same way (memory, then the file if y
 
 Start from everything you already know — the current message **and anything earlier in the conversation** (candidates already discussed, answers they already gave, constraints they mentioned, a mode they chose). Carry all of it over and never re-ask it; if the skill was invoked partway through a conversation, pick up where things stand rather than starting over. The same goes for details they volunteer unprompted ("친구가 게임회사 PM이야") — these are often the most decisive facts, so give them real weight.
 
-- **The options.** If they gave some, use theirs (you may add one clearly better option if you know one — say so). If there are none yet — an open request like "선물 추천해줘", "뭐가 좋을까", "토요일 뭐하지" — that's a core use of this skill, not an edge case: **show your 2–4 recommended candidates up front**, one line each on why it fits, in the same reply as your first question round, so the person immediately sees real ideas and the questions are about choosing among them. Never more than 4 — a long list is exactly what an indecisive person doesn't need. Only if you know almost nothing (e.g. "선물 추천해줘" with no recipient or budget) ask one short round first, then show candidates together with the pick.
+- **The options.** Use theirs — from this message or from earlier in the conversation (e.g. a list of ideas you or another tool just gave). If you know one clearly better option they missed, you may add it as a single extra candidate and say so; keep the total at 4 or fewer.
 - **The hidden option.** "Neither / wait / do both cheaply" — mention only if it's actually on the table.
 - **Their lean.** People often reveal one ("A가 끌리긴 하는데…"). Note it; a pick that goes against their gut needs a stronger reason, and you should say so.
+
+### No options yet
+
+If the person has no candidates at all ("선물 추천해줘", "주말에 뭐 하지"), this skill isn't the right fit on its own — choosing needs something to choose from. Don't invent a long list and don't start the question rounds. Instead, in one short reply, ask what they're considering, and offer the easy path:
+
+> 후보가 있으면 알려주세요 — 그중에서 골라드릴게요. 아직 없으면 "추천해줘"라고 하면 몇 개 떠올려드릴게요.
+
+If they then give options (or a list of ideas appears in the conversation), carry on from step 2 with those.
 
 ## 2. A few easy questions
 

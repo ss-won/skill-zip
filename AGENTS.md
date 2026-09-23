@@ -23,6 +23,16 @@ registry.json             every skill must be listed here
 - Explain *why* instead of stacking MUST/NEVER.
 - Never write to a user's home directory from a skill unless the user asked.
 
+## Atomic skills
+
+Skills here are small and do **one job** each; bigger flows come from several skills triggering in sequence (e.g. `option-finder` → "골라줘" → `decision-buddy`).
+
+- **One job, one trigger.** If a description needs "and also…" to cover two different user situations, split it.
+- **State the boundary in both descriptions.** Each description says when *not* to use it, pointing at the neighbour's situation, so the two don't compete ("Do not use when the person already names options…").
+- **Standalone.** Skills can't call each other and may be installed alone. Never assume the neighbour exists; degrade gracefully (ask for what's missing, or do a minimal version).
+- **Hand off in the user's words.** End with a short line that invites the phrase that triggers the next skill ("이 중에 고르기 어려우면 '골라줘'라고 해주세요").
+- **Shared conventions are copied, not imported.** Keep them tiny (tone, plain language, mode names) so drift is easy to spot. Record pairings in `registry.json → pairsWith`.
+
 ## Workflow for a new skill or change
 
 1. Draft / edit with Anthropic's `skill-creator`.

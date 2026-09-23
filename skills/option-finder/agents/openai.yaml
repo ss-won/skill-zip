@@ -1,0 +1,7 @@
+# Codex UI metadata (optional). See https://developers.openai.com/codex/skills
+interface:
+  display_name: "Option Finder"
+  short_description: "후보가 없을 때 나한테 맞는 추천안 3~4개를 뽑아주는 도우미"
+  default_prompt: "이거 추천해줘: "
+policy:
+  allow_implicit_invocation: true

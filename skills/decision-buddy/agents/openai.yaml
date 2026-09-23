@@ -1,7 +1,7 @@
 # Codex UI metadata (optional). See https://developers.openai.com/codex/skills
 interface:
   display_name: "Decision Buddy"
-  short_description: "추천안 몇 개 + 쉬운 질문 몇 개로 하나 딱 골라주는 도우미"
-  default_prompt: "이거 뭐 고를지 골라줘: "
+  short_description: "고민 중인 선택지 중에서 쉬운 질문 몇 개로 하나 딱 골라주는 도우미"
+  default_prompt: "A랑 B 중에 골라줘: "
 policy:
   allow_implicit_invocation: true
