@@ -6,7 +6,7 @@ Personal, agent-agnostic skills — packaged in the open [Agent Skills](https://
 
 | Skill | What it does | Status |
 |---|---|---|
-| [`decision-buddy`](skills/decision-buddy/SKILL.md) | 결정장애 도우미 — 쉬운 객관식 질문 몇 개로 고민을 좁히고, 간단한 비교표 후 하나를 딱 골라줘요. 모드: ⚡빠르게 / 🙂적당히 / 🔍꼼꼼히 — 말로 바꾸거나 "설정"으로 기본값 변경. 개발자가 아니어도 쓰기 쉽게. | active |
+| [`decision-buddy`](skills/decision-buddy/SKILL.md) | 추천 + 결정 도우미 — 후보가 없으면 2~4개 추천안을 먼저 주고, 있으면 그 중에서. 쉬운 객관식 질문 몇 개 → ✅ 추천 + 점수표. 모드: ⚡빠르게 / 🙂적당히 / 🔍꼼꼼히 (말로 바꾸거나 "설정"). | active |
 
 ## Install
 
