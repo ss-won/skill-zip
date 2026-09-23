@@ -36,7 +36,9 @@ No questions: nothing about their situation would change this enough to be worth
 
 **User:** 1a 2a 3b
 
-**Assistant (matrix + pick):**
+**Assistant (pick + table):**
+> ✅ **추천: zustand**
+>
 > | 기준 | zustand | jotai | RTK |
 > |---|---|---|---|
 > | 팀이 배우기 쉬움 ★★★ | 5 | 4 | 2 |
@@ -44,7 +46,6 @@ No questions: nothing about their situation would change this enough to be worth
 > | 파생 상태 표현 ★ | 3 | 5 | 3 |
 > | **점수** | **28** | 25 | 15 |
 >
-> ✅ **추천: zustand**
 > 왜: 서버 상태는 Query가 맡으니 전역엔 가벼운 UI 상태만 남고, 팀이 훅 방식에 익숙해서 가장 빨리 굴러가요.
 > 이럴 땐 다른 쪽: 폼/필터처럼 서로 얽힌 파생 상태가 늘어나면 → jotai / 이벤트 추적·미들웨어·엄격한 규칙이 필요한 복잡한 도메인이면 → RTK
 > 지금 할 일: 모달·테마 store 하나만 zustand로 만들어서 SSR hydration까지 확인해보기 (30분).
@@ -72,7 +73,9 @@ No questions: nothing about their situation would change this enough to be worth
 
 **User:** 1a 2a
 
-**Assistant (matrix + sensitivity + pick):**
+**Assistant (pick + table + what flips it):**
+> ✅ **추천: A**
+>
 > | 기준 | A 스타트업 | B 대기업 |
 > |---|---|---|
 > | 성장·오너십 ★★★ | 5 | 3 |
@@ -83,7 +86,6 @@ No questions: nothing about their situation would change this enough to be worth
 >
 > 뒤집히려면: 안정성을 제일 중요하게 볼 때만 B가 따라잡아요 — 그런데 2번 질문에서 "어려워져도 괜찮다"고 하셨죠.
 >
-> ✅ **추천: A**
 > 왜: 3년 우선순위가 성장이고, 스톡옵션을 0으로 봐도 A가 끌린다고 했어요. B 쪽 기울기는 불안감인데, 그 불안은 리스크 감내 답과 충돌해요.
 > 이럴 땐 다른 쪽: A의 런웨이(회사가 버틸 수 있는 기간)가 12개월 미만이거나 직속 리드가 곧 나간다면 → B / 1~2년 내 큰 고정지출 계획(이사·대출 등)이 있으면 → B
 > 지금 할 일: A에 "현재 런웨이"와 "합류할 팀 리드 재직 기간" 두 가지만 오늘 메일로 물어보기. 답이 괜찮으면 사인.
@@ -106,16 +108,15 @@ Why this shape: no candidates were given, so it still runs (open recommendation)
 **User:** 1a 2a 3a, 금요일이야
 
 **Assistant:**
-> 후보: A 목·어깨 마사지기 / B 좋은 원두 드립백 세트 / C 블루라이트 차단 안경
+> ✅ **추천: 목·어깨 마사지기**
 >
-> | 기준 | A | B | C |
+> | 기준 | 마사지기 | 드립백 세트 | 블루라이트 안경 |
 > |---|---|---|---|
 > | 모니터 앞 하루에 도움 ★★★ | 5 | 3 | 4 |
 > | 이미 가졌을 확률 낮음 ★★ | 4 | 4 | 3 |
 > | 5만원 안 ★ | 4 | 5 | 5 |
 > | **점수** | **27** | 22 | 23 |
 >
-> ✅ **추천: 목·어깨 마사지기**
 > 왜: 회의 많고 하루 종일 모니터 앞이면 제일 매일 체감되고, 키보드·마우스처럼 이미 있을 확률도 낮아요.
 > 이럴 땐 다른 쪽: 친구가 커피를 꼭 챙겨 마시는 편이면 → 드립백 세트 / 안경을 이미 쓰는 친구면 → 블루라이트 안경은 빼기
 > 지금 할 일: 생일이 금요일이라 **오늘 안에 새벽·당일 배송 되는 걸로 주문**하세요. 내일 주문하면 금요일 도착이 빠듯해요.

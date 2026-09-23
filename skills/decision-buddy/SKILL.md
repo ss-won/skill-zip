@@ -11,7 +11,7 @@ Many users are not developers. Everything the person sees should read like a fri
 
 ```
 0. Pick the mode  →  1. Frame  →  2. A few easy questions
-→  3. Simple comparison table (once options are clear)  →  4. One pick + "if things change"
+→  3. Score the options  →  4. ✅ Pick first, score table under it, then why / if things change / next step
 ```
 
 ## 0. Pick the mode
@@ -113,43 +113,43 @@ Question families (pick what fits, don't run through all):
 
 In 빠르게: if nothing would flip the pick, ask nothing. If exactly one thing would, ask just that — unless they said "질문 없이", in which case pick on the likeliest assumption and say it ("혼밥이라고 치면 → 쌀국수").
 
-## 3. Simple comparison table (once the options are clear)
+## 3. Score the options (once they're clear)
 
-When the options are settled (2–4) and you know what they care about, show a small table. Skip it in 빠르게.
+When the options are settled (2–4) and you know what they care about, score them. The scores become a small table that sits **under the pick** in step 4 as its proof. Skip scoring in 빠르게.
 
 - 3–6 rows, taken from **their answers**, not a generic checklist.
-- Mark importance in plain words or stars — `(중요 ★★★)` — not "weight ×3". Deal-breakers aren't rows; they remove options before scoring.
+- Mark importance in plain words or stars — `오래 간직함 ★★★` — not "weight ×3". Deal-breakers aren't rows; they remove options before scoring.
 - Score each option 1–5 per row; use real facts for factual rows.
 - **Mark cells you couldn't verify.** Some rows depend on things you can't know — stock at a specific store, whether it can be ready by a date, current prices, a restaurant's wait. Give your best estimate but flag it with `?` (e.g. `3?`), and add one line under the table: "`?` = 확인이 필요한 추정치예요 — 매장에 전화해보면 확실해져요." If a `?` cell could change the winner, say so in the flip line and make checking it part of "지금 할 일".
-- Show a total. Keep it small enough to read on a phone.
+- Total = sum of (points × stars). Bold the winner's total. Keep the table small enough to read on a phone. Don't explain the arithmetic unless they ask.
+- The pick should normally be the top score. If you pick against the table (their gut, or something obvious the rows miss), say so in the "왜" line and say which you trust and why — the table supports the decision; it doesn't make it.
+
+## 4. The answer — pick first, table as proof
+
+Lead with the decision. Stuck people need permission to stop deliberating, and the first thing they see should be the answer, not a grid of numbers. Never finish with "둘 다 장단점이 있어요".
+
+Use this order (적당히 / 꼼꼼히):
 
 ```
-| 기준               | A  | B  | C  |
-|-------------------|----|----|----|
-| 배우기 쉬움 ★★★     | 4  | 5  | 2  |
-| 가격 ★★            | 3  | 3  | 4  |
-| 오래 쓰기 ★         | 3  | 4  | 5  |
-| **점수**           | 21 | 25 | 19 |
-```
+✅ 추천: 각인 볼펜 + 손편지
 
-(Scores are importance × points: ★★★ counts triple.) Don't explain the arithmetic unless they ask.
+| 기준              | 텀블러 | 명함지갑 | 각인 볼펜 |
+|------------------|-------|--------|---------|
+| 오래 간직함 ★★★    | 2     | 4      | 5       |
+| 매일 씀 ★★        | 3     | 1      | 2       |
+| 가진 것과 안 겹침 ★  | 1     | 5      | 3       |
+| 10/1까지 준비 ★★   | 3     | 3      | 4?      |
+| **점수**          | 19    | 25     | **30**  |
 
-In 꼼꼼히, add one line on **what would flip it**: "가격을 제일 중요하게 보면 C가 역전해요." This shows which assumption the decision really hinges on.
-
-The table supports the decision; it doesn't make it. If the total disagrees with their gut or with something obvious, say so and say which you trust and why.
-
-## 4. One pick
-
-End with a clear commitment. Stuck people need permission to stop deliberating — never finish with "둘 다 장단점이 있어요".
-
-```
-✅ 추천: B
 왜: (1–2 lines tied to *their* answers)
 이럴 땐 다른 쪽: X라면 → A / Y라면 → C
 지금 할 일: (one small, concrete action they can do today)
 ```
 
-- **One pick**, not a ranking. The "이럴 땐" line is where the other options live.
+- If you have a one-line reading of an ambiguous answer, a candidate swap note, or the `?` legend, put it right under the table, before "왜".
+- In 꼼꼼히, add one line after the table on **what would flip it**: "매일 쓰는 걸 제일 중요하게 보면 텀블러가 역전해요." This shows which assumption the decision really hinges on.
+- In 빠르게 there's no table: `✅ 추천` → 왜 → 이럴 땐 다른 쪽 → 지금 할 일, a few lines total.
+- **One pick**, not a separate ranking — the score row already shows the order. The "이럴 땐" line is where the other options live.
 - Those conditions must be specific and checkable, not "취향에 따라".
 - The action should be small enough to do right now; it turns the decision into momentum.
 - Check timing before writing it: if there's a date involved (birthday, trip, deadline, event), make sure the action fits — delivery times, weekends and holidays, reservations or stock that run out. If you don't know the date and it matters, it's fine to ask it as one of your questions. E.g. "생일이 금요일이면 오늘 주문해야 연휴 전에 도착해요."
