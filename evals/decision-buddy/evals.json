@@ -145,6 +145,20 @@
         "Switches to picking now ('그냥 골라줘') with at most 0-1 questions",
         "Final answer commits to exactly one destination"
       ]
+    },
+    {
+      "id": 11,
+      "name": "weak-candidates-farewell",
+      "prompt": "꼼꼼히 팀장님 송별 선물 고민이야. 텀블러, 명함지갑, 고급 볼펜 중에 뭐가 나을까? 예산 7만원, 10/1 송별회 전까지 준비해야 해",
+      "persona": "personas/farewell-gift.md",
+      "expected_output": "답변 후 세 후보가 모두 약해짐 → 후보 교체/추가를 한 줄로 알리고 비교. 애매한 자유 답의 해석을 한 줄로 밝힘. 확인 불가 칸(재고·준비 가능)은 ?로 표시.",
+      "expectations": [
+        "When all three original candidates are weakened, replaces or adds candidates and says so in one line",
+        "States its interpretation of the ambiguous free-form answer ('텀블러, 펜은 있는데 자주 안 씀') in one line",
+        "Marks unverifiable table cells (stock / ready-by-date / engraving) with ? or similar and explains the mark",
+        "Next step accounts for the 10/1 deadline and the holiday",
+        "Final answer commits to exactly one gift"
+      ]
     }
   ]
 }
