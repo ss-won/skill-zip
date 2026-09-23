@@ -1,13 +1,19 @@
 {
   "$comment": "Source of truth for skill lifecycle. status: active | candidate | deprecated. Edit by hand or via scripts/check-deprecation.mjs --apply.",
-  "trackedModels": [
-    "claude-opus-5-5"
-  ],
+  "trackedModels": ["claude-opus-5-5"],
   "policy": {
-    "minDelta": 0.1,
+    "minDelta": 0.10,
     "regressionDrop": 0.15,
     "unusedDays": 60,
     "staleBenchmarkDays": 90
   },
-  "skills": {}
+  "skills": {
+    "decision-buddy": {
+      "version": "0.1.0",
+      "status": "active",
+      "agents": ["claude-code", "codex", "claude-desktop"],
+      "tags": ["personal", "decision-making"],
+      "added": "2026-09-23"
+    }
+  }
 }

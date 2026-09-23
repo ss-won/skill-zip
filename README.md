@@ -6,7 +6,7 @@ Personal, agent-agnostic skills — packaged in the open [Agent Skills](https://
 
 | Skill | What it does | Status |
 |---|---|---|
-| `decision-buddy` | 결정장애 도우미 — in review on branch `feat/decision-buddy` | 🧪 review |
+| [`decision-buddy`](skills/decision-buddy/SKILL.md) | 결정장애 도우미 — asks a few targeted questions to shrink the gray zone, builds a weighted matrix once options are clear, then commits to one situational pick. Question intensity is adjustable (`빠르게` / `깊게`). | active |
 
 ## Install
 

@@ -1,0 +1,78 @@
+{
+  "skill_name": "decision-buddy",
+  "evals": [
+    {
+      "id": 1,
+      "name": "quick-lunch",
+      "prompt": "점심 뭐 먹지. 김치찌개, 쌀국수, 샐러드 중에 못 고르겠어",
+      "persona": "personas/lunch.md",
+      "expected_output": "quick 강도: 질문 0~1개, 매트릭스 없이 하나 골라주고 짧은 flip 조건.",
+      "expectations": [
+        "Asks at most 1 question before giving a pick",
+        "Does not include a scoring matrix/table",
+        "Final answer commits to exactly one option",
+        "Includes at least one concrete 'if the situation changes → other option' condition",
+        "Total final answer is short (under ~12 lines)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "standard-state-lib",
+      "prompt": "새 Next.js(app router) 프로젝트 상태관리 zustand, jotai, redux toolkit 중에 고민 중이야. 팀은 3명.",
+      "persona": "personas/state-lib.md",
+      "expected_output": "standard: 상황 질문 2~4개(객관식) → 답 기반 가중치 매트릭스 → 하나 추천 + flip 조건 + 다음 한 걸음.",
+      "expectations": [
+        "Asks 2-4 questions in the first round before recommending",
+        "Questions are multiple-choice (lettered/numbered options or a structured question tool)",
+        "Questions are about the user's situation (team, server state, state shape), not general trivia",
+        "Waits for answers before giving the final recommendation (no recommendation in the same turn as the questions)",
+        "Presents a comparison matrix with weighted criteria derived from the user's answers",
+        "Final answer commits to exactly one option",
+        "Includes concrete flip conditions naming the alternatives",
+        "Includes one small concrete next step"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "deep-job-offer",
+      "prompt": "오퍼 두 개 받았는데 결정을 못하겠어. A는 시리즈B 스타트업, 연봉 +20%에 스톡옵션. B는 대기업 계열, +10%에 안정적. 둘 다 프론트엔드 포지션이야.",
+      "persona": "personas/job-offer.md",
+      "expected_output": "deep: 여러 라운드 질문으로 우선순위/리스크/직감 파악 → 가중치 매트릭스 + 민감도 → 하나 추천 + flip 조건 + 다음 한 걸음.",
+      "expectations": [
+        "Asks questions about priorities and risk tolerance before recommending",
+        "Surfaces the upcoming move/loan (or similar financial commitment) as a factor via a question",
+        "Presents a weighted comparison matrix",
+        "Includes a sensitivity check (what change would flip the result)",
+        "Final answer commits to exactly one option",
+        "Includes concrete flip conditions",
+        "Includes one small concrete next step (e.g. asking about runway)"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "no-questions-override",
+      "prompt": "질문하지 말고 그냥 빨리 골라줘. 맥북 에어 15 vs 맥북 프로 14",
+      "persona": "personas/macbook.md",
+      "expected_output": "사용자가 질문 금지를 요청 → 질문 없이 가정을 명시하고 즉시 한 개 추천.",
+      "expectations": [
+        "Asks zero questions",
+        "Final answer commits to exactly one option",
+        "States the assumption the pick is based on or gives a flip condition",
+        "Answer is short (under ~12 lines)"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "vague-weekend",
+      "prompt": "이번 토요일 뭐하지… 아무것도 못 정하겠어",
+      "persona": "personas/weekend.md",
+      "expected_output": "옵션이 없음 → 2~4개 후보를 제안하고 소수의 질문으로 좁힌 뒤 하나 추천.",
+      "expectations": [
+        "Proposes no more than 4 candidate options",
+        "Asks at most 3 questions in total",
+        "Final answer commits to exactly one plan",
+        "Includes one small concrete next step"
+      ]
+    }
+  ]
+}
