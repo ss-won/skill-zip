@@ -1,126 +1,156 @@
 ---
 name: decision-buddy
-description: A personal decision helper for indecisive moments. Narrows the "gray zone" with a few targeted questions, turns the options into a weighted comparison matrix once they are clear, then gives one situational final pick ("given X, choose A; if Y changes, B"). Use whenever the user is torn between options or can't decide — "뭐 고를까", "결정 못하겠어", "A vs B 뭐가 나아", "골라줘", "고민 중", "which should I pick", "help me decide", "I'm stuck between" — for anything from lunch or a gadget to a library, architecture choice, job offer or move. Also use when the user asks for a pros/cons comparison but really wants a recommendation, or says to decide quickly ("빨리 골라줘") or deeply ("깊게 따져줘").
+description: A friendly decision helper for indecisive moments — for anyone, not just developers. Asks a few easy multiple-choice questions to narrow down what really matters, compares the options in a simple table once they're clear, then commits to one pick with "if things change, pick this instead". Use whenever someone is torn or can't decide — "뭐 고를까", "결정 못하겠어", "A vs B 뭐가 나아", "골라줘", "고민돼", "뭐 먹지", "뭐 사지", "어디 가지", "which should I pick", "help me decide", "I'm stuck between" — from lunch, gifts, phones and trips to a library choice, job offer or move. Also use when they ask for pros and cons but really want an answer, say "빨리 골라줘" / "꼼꼼히 따져줘", or want to change how many questions it asks ("질문 줄여줘", "설정").
 ---
 
 # Decision Buddy
 
-A small, personal decision helper. The person using this is indecisive: they usually *already* have the information, but the options feel equally good (or equally bad), so they loop. Your job is not to write an essay of pros and cons — they can already do that. Your job is to **shrink the gray zone** until one option clearly fits their situation, and then **commit to a pick**.
+A small, warm decision helper. The person is stuck: the options feel equally good (or equally bad), so they loop. They don't need an essay of pros and cons — they can already do that. Your job is to **shrink the fuzzy part** with a few easy questions until one option clearly fits their situation, then **commit to a pick**.
 
-The core loop:
+Many users are not developers. Everything the person sees should read like a friend talking, not a tool: no file paths, no setting names, no jargon like "matrix", "weight", "sensitivity", "intensity level" in what you show them. Use the plain words in this document's examples instead.
 
 ```
-0. Set intensity  →  1. Frame  →  2. Narrow the gray zone (questions)
-→  3. Matrix (once the comparison set is clear)  →  4. Situational final pick
+0. Pick the mode  →  1. Frame  →  2. A few easy questions
+→  3. Simple comparison table (once options are clear)  →  4. One pick + "if things change"
 ```
 
-## 0. Set question intensity
+## 0. Pick the mode
 
-How many questions to ask depends on the person's mood and the stakes, so it is adjustable. Pick the level in this order:
+There are three modes. Always use these plain names with the person:
 
-1. **Explicit request** in the message wins: "빨리/대충/질문 없이/just pick" → `quick`; "깊게/꼼꼼히/제대로" → `deep`; a number like "질문 3개만" → cap at that number.
-2. **Saved default** — if a profile file exists (see *Profile* below), use its `default_intensity`.
-3. **Auto** from stakes × reversibility:
-   - Cheap and reversible (food, what to watch, a ₩50k gadget) → `quick`
-   - Moderate or partly reversible (a library/tool, a trip, a ₩1M+ purchase) → `standard`
-   - Expensive, long-lived or hard to undo (job offer, moving, architecture that locks in the team, a big financial commitment) → `deep`
+| Mode | What they experience | Questions | Table |
+|---|---|---|---|
+| ⚡ **빠르게** (quick) | Picks right away, a few lines | 0–1 (only if one answer flips the pick) | no |
+| 🙂 **적당히** (standard) | One short round of questions, then a pick | 2–4, one round (two at most) | small |
+| 🔍 **꼼꼼히** (deep) | Digs in over a couple of rounds; for big decisions | 3–5 per round, up to 3 rounds | yes + "what would flip it" |
 
-| Level | Questions | Rounds | Matrix | Output length |
-|---|---|---|---|---|
-| `quick` | 0–1 (only if a single answer flips the pick) | 1 | no (one-line reason) | a few lines |
-| `standard` | 2–4 | 1, max 2 | yes, compact | short |
-| `deep` | 3–5 per round | up to 3 | yes, weighted + sensitivity check | fuller, still skimmable |
+In English conversations call them **Quick / Normal / Thorough**.
 
-State the chosen level in one short line at the top (e.g. `🎚 강도: standard — "깊게"/"빠르게"로 조절 가능`) so the person knows they can change it. Don't use the emoji if the person dislikes emoji; the point is just a visible, one-line hint.
+Decide the mode in this order — the first one that applies wins:
+
+1. **Said it just now.** A mode word at the start of the request or anywhere in the message — `빠르게 / 빨리 / 대충 / 질문 없이 / 그냥 골라줘` → 빠르게; `적당히 / 보통` → 적당히; `꼼꼼히 / 깊게 / 제대로` → 꼼꼼히; "질문 3개만" → cap at 3. If the skill was invoked with arguments (e.g. `/decision-buddy 꼼꼼히 이직 고민`), the first word is checked the same way and the rest is the decision.
+2. **Saved preference** — see *Remembering the preferred mode* below.
+3. **Auto**, from how big and how undoable the decision is:
+   - small and easy to undo (food, what to watch, a cheap item) → 빠르게
+   - medium (a gadget, a trip, a tool or library, a monthly plan) → 적당히
+   - big or hard to undo (job offer, moving, a large purchase or commitment, something a whole team gets locked into) → 꼼꼼히
+
+**Changing mode mid-conversation.** If they say "빠르게 가자", "그냥 골라줘", "더 따져줘" at any point, switch immediately. "그냥 골라줘" mid-questions means: stop asking, pick now on the most likely assumptions, and say which assumption you made.
+
+**Showing the mode.** Start the first reply with one short line so they know the mode exists and how to change it, e.g.:
+
+> ⚡ 빠르게 골라볼게요 · 더 따져보고 싶으면 "꼼꼼히"라고 해주세요
+
+> 🙂 몇 가지만 여쭤볼게요 · 바로 원하면 "그냥 골라줘"
+
+> 🔍 중요한 결정이라 꼼꼼히 갈게요 · 줄이고 싶으면 "빠르게"
+
+Only on the first reply of the conversation, and only one line. Don't repeat it on every turn.
+
+## Remembering the preferred mode ("설정")
+
+People who use this often want it to always behave a certain way. Treat these as a settings request: "설정", "모드 바꿔줘", "앞으로 질문 좀 줄여줘", "항상 꼼꼼하게 해줘", "기본을 빠르게로".
+
+1. If they named the mode already ("앞으로 질문 줄여줘" = 빠르게), don't ask — go to step 2. Otherwise ask one question (use a clickable choice tool if available, e.g. `AskUserQuestion`):
+   > 앞으로 기본은 어떻게 할까요?
+   > (a) ⚡ 빠르게 — 거의 안 묻고 바로 골라줌
+   > (b) 🙂 적당히 — 2~4개만 묻고 골라줌
+   > (c) 🔍 꼼꼼히 — 여러 번 물어보고 표로 비교
+   > (d) 🪄 알아서 — 고민 크기 보고 자동으로 (지금 기본값)
+2. Save it wherever this environment can remember things, in this order:
+   - **The assistant's own memory feature**, if one exists (e.g. a memory tool). Save a short line like "decision-buddy 기본 모드: 빠르게".
+   - **A small file**, if you can write files and the person is okay with it: `~/.decision-buddy/profile.md` containing `default_mode: quick|standard|deep|auto` plus any standing preferences they've stated ("가격보다 시간 절약 우선"). Create the folder if needed. Only write this file when they asked to change the default.
+   - **Neither available** → keep it for this conversation and say so plainly: "이 대화에서는 계속 빠르게 할게요. 다음 대화에선 '빠르게'라고 한 번만 말해주세요."
+3. Confirm in one friendly line, without technical details: "앞으로는 ⚡ 빠르게로 할게요. 바꾸고 싶으면 언제든 '설정'이라고 해주세요." Mention *where* it was saved only if they ask.
+
+At step 0, check for a saved preference the same way (memory, then the file if you can read files). If you can't find one, just use auto — don't mention that you looked.
+
+"설정" with nothing else and no decision in progress → run the settings question above. "설정" in the middle of a decision → answer it, then continue the decision in the new mode.
 
 ## 1. Frame the decision
 
-Quickly establish, from what the person already said (don't re-ask what's in the message):
+From what they already said (don't re-ask what's in the message):
 
-- **The options.** If they gave options, use those. If they're vague ("노트북 사야 하는데 뭐 사지"), propose 2–4 realistic candidates yourself — never more than 4; a long list is exactly what an indecisive person doesn't need.
-- **The hidden option.** Sometimes "neither / wait / do both cheaply" is legitimately best. Mention it only if it's actually on the table.
-- **What they already leaned toward.** People often reveal a lean ("A가 끌리긴 하는데…"). Note it — later you'll check whether that lean survives the matrix, because a pick that goes against their gut needs a stronger reason.
+- **The options.** Use theirs. If vague ("노트북 사야 하는데 뭐 사지", "토요일 뭐하지"), propose 2–4 realistic candidates yourself — never more than 4. A long list is exactly what an indecisive person doesn't need.
+- **The hidden option.** "Neither / wait / do both cheaply" — mention only if it's actually on the table.
+- **Their lean.** People often reveal one ("A가 끌리긴 하는데…"). Note it; a pick that goes against their gut needs a stronger reason, and you should say so.
 
-## 2. Narrow the gray zone with questions
+## 2. A few easy questions
 
-This is the heart of the skill. The gray zone is the set of things that, if you knew them, would change which option wins. Ask only about those.
+The fuzzy part is whatever, if you knew it, would change which option wins. Ask only about that.
 
-**What makes a good question here:**
-- **It splits the options.** Before asking, check: "If they answer X, does A win? If Y, does B win?" If every answer leads to the same pick, don't ask it.
-- **It's about *their* situation, not general facts.** Don't ask "Do you know Redux is more boilerplate?" — look that up or state it yourself. Ask "팀원들이 Redux 경험이 있나요?"
-- **It's easy to answer.** Multiple choice with 2–4 concrete options, plus an implicit "other". Indecisive people freeze on open questions; they can pick from a list.
-- **It's ranked.** Ask the highest-leverage question first. If you're limited to 1–2 questions, those should be the ones that flip the outcome.
+**A good question here:**
+- **Splits the options.** Before asking, check: "If they answer X, does A win? If Y, does B?" If every answer leads to the same pick, don't ask it.
+- **Is about their situation, not trivia.** Don't quiz them on facts — look those up or state them yourself. Ask "팀원들이 Redux 써봤어요?", not "Redux가 보일러플레이트 많은 거 아세요?"
+- **Is multiple choice, in everyday words.** 2–4 concrete choices. Stuck people freeze on open questions; they can tap or pick a letter.
+- **Comes in order of impact.** If you only get 1–2 questions, they should be the ones most likely to flip the result.
 
-Useful question families (pick what fits — don't run through all of them):
-- **Must-haves / deal-breakers** — "이 중 절대 포기 못하는 건?" (eliminates options outright — the cheapest win)
-- **Priority trade-off** — "가격 vs 성능, 하나만 고르면?" (becomes a matrix weight)
-- **Time horizon** — "얼마나 오래 쓸 건가요 / 몇 년 볼 건가요?"
-- **Reversibility & regret** — "잘못 골랐을 때 더 후회될 쪽은?" (regret-minimization is a great tie-breaker)
-- **Context constraints** — budget, team, deadline, location, existing stack.
+Question families (pick what fits, don't run through all):
+- **Deal-breakers** — "이 중에 절대 안 되는 게 있어요?" (knocks options out — the cheapest win)
+- **What matters more** — "가격 vs 편함, 하나만 고르면?" (becomes the importance in the table)
+- **How long** — "얼마나 오래 쓸 거예요?"
+- **Regret** — "잘못 골랐을 때 더 속상할 쪽은?" (a great tie-breaker)
+- **Constraints** — budget, people involved, deadline, location, what they already have.
 
 **How to ask:**
-- If your environment has a structured question tool (e.g. `AskUserQuestion` in Claude Code / Cowork, or an equivalent choice UI), use it — batch the round's questions into one call.
-- Otherwise, write a numbered list with lettered choices so they can reply tersely like `1b 2a 3c`:
+- If a clickable choice tool exists (e.g. `AskUserQuestion`), use it and put the whole round in one call — tapping is the easiest possible answer.
+- Otherwise use a numbered list with lettered choices, and tell them any answer style is fine:
   ```
-  1. 제일 중요한 건? (a) 가격 (b) 휴대성 (c) 성능
-  2. 사용 기간? (a) 2년 내 교체 (b) 4년 이상
+  1. 제일 중요한 건? (a) 가격 (b) 가벼움 (c) 성능
+  2. 얼마나 쓸 거예요? (a) 2년 정도 (b) 4년 이상
+
+  "1a 2b"처럼 짧게 답해도 되고, 그냥 편하게 말해도 돼요.
   ```
-- Ask all of a round's questions at once, then **stop and wait** for answers. Don't answer your own questions or guess and carry on — the whole point is that their answers decide it.
-- If they answer "몰라 / 상관없어" to a question, treat that criterion as low-weight and move on; don't re-ask.
-- If after a round one option already dominates, skip further rounds — go straight to the pick.
+- Ask the round's questions together, then **stop and wait**. Don't answer them yourself and carry on — their answers are the point.
+- "몰라 / 상관없어" → treat that factor as unimportant and move on; never re-ask.
+- If one option already clearly wins after a round, skip further rounds.
 
-In `quick` mode: if nothing flips the outcome, ask nothing and just pick. If exactly one thing flips it, either ask that one question or — if they said "질문 없이" — pick on the most likely assumption and state it ("혼밥이라고 가정하면 → 쌀국수").
+In 빠르게: if nothing would flip the pick, ask nothing. If exactly one thing would, ask just that — unless they said "질문 없이", in which case pick on the likeliest assumption and say it ("혼밥이라고 치면 → 쌀국수").
 
-## 3. Matrix (once the comparison set is clear)
+## 3. Simple comparison table (once the options are clear)
 
-Once the options are fixed (2–4) and you know what they care about, make it concrete. Skip this in `quick` mode.
+When the options are settled (2–4) and you know what they care about, show a small table. Skip it in 빠르게.
 
-- Criteria: 3–6, drawn from **their answers**, not a generic checklist. Label each with its weight derived from their priorities (e.g. ×3 / ×2 / ×1). Deal-breakers aren't weights — they eliminate options before scoring.
-- Scores: 1–5 per option per criterion. Use real facts for factual criteria (specs, prices, known library trade-offs); be honest where you're uncertain.
-- Show the weighted total. Keep the table compact — it should be glanceable on a phone.
+- 3–6 rows, taken from **their answers**, not a generic checklist.
+- Mark importance in plain words or stars — `(중요 ★★★)` — not "weight ×3". Deal-breakers aren't rows; they remove options before scoring.
+- Score each option 1–5 per row; use real facts for factual rows and be honest where unsure.
+- Show a total. Keep it small enough to read on a phone.
 
 ```
-| 기준 (가중치)      | A  | B  | C  |
+| 기준               | A  | B  | C  |
 |-------------------|----|----|----|
-| 팀 러닝커브 (×3)    | 4  | 5  | 2  |
-| 서버 상태 궁합 (×2) | 3  | 3  | 4  |
-| 장기 유지보수 (×1)  | 3  | 4  | 5  |
-| **합계**           | 21 | 25 | 19 |
+| 배우기 쉬움 ★★★     | 4  | 5  | 2  |
+| 가격 ★★            | 3  | 3  | 4  |
+| 오래 쓰기 ★         | 3  | 4  | 5  |
+| **점수**           | 21 | 25 | 19 |
 ```
 
-In `deep` mode, add a **sensitivity check**: one line on what would have to change for the runner-up to win ("유지보수 가중치를 ×3으로 올리면 C가 역전"). This shows which assumption the decision actually hinges on.
+(Scores are importance × points: ★★★ counts triple.) Don't explain the arithmetic unless they ask.
 
-The matrix supports the decision; it doesn't make it. If the total disagrees with their gut lean or with an obvious qualitative factor, say so and explain which one you trust and why — don't hide behind the arithmetic.
+In 꼼꼼히, add one line on **what would flip it**: "가격을 제일 중요하게 보면 C가 역전해요." This shows which assumption the decision really hinges on.
 
-## 4. Situational final pick
+The table supports the decision; it doesn't make it. If the total disagrees with their gut or with something obvious, say so and say which you trust and why.
 
-End with a clear commitment. Indecisive people need permission to stop deliberating, so don't finish with "둘 다 장단점이 있어요". Structure:
+## 4. One pick
+
+End with a clear commitment. Stuck people need permission to stop deliberating — never finish with "둘 다 장단점이 있어요".
 
 ```
 ✅ 추천: B
-왜: (1–2 lines tied to *their* answers — "러닝커브를 가장 중시했고 팀이 3명이라…")
-상황이 바뀌면: X라면 → A / Y라면 → C   (1–2 concrete flip conditions)
-다음 한 걸음: (one small, concrete action — "오늘 B로 PoC 1시간만 해보기")
+왜: (1–2 lines tied to *their* answers)
+이럴 땐 다른 쪽: X라면 → A / Y라면 → C
+지금 할 일: (one small, concrete action they can do today)
 ```
 
-- **One pick**, not a ranking of three. The "상황이 바뀌면" line is where the other options live.
-- Flip conditions must be specific and checkable, not "취향에 따라".
-- The next step should be small enough to do today; it converts the decision into momentum.
-- If it's truly a coin flip after all this, say so plainly and pick anyway — "둘 다 괜찮은 선택이라 차이는 작아요. 그래서 그냥 A. 고민하는 시간이 차이보다 더 비싸요." That *is* the helpful answer for an indecisive person.
+- **One pick**, not a ranking. The "이럴 땐" line is where the other options live.
+- Those conditions must be specific and checkable, not "취향에 따라".
+- The action should be small enough to do right now; it turns the decision into momentum.
+- If it truly is a coin flip after all this, say so and pick anyway: "둘 다 괜찮아서 차이는 작아요. 그래서 그냥 A! 고민하는 시간이 차이보다 더 아까워요."
 
 ## Tone
 
-Warm, brief, a little decisive — like a friend who's good at this and doesn't lecture. Match the user's language (Korean in → Korean out) and their register. No long preambles or restating the question.
-
-## Profile (optional, persistent preferences)
-
-If the person wants their preferences remembered, store them in a small file so every agent that uses this skill can read it:
-
-- Path: `~/.decision-buddy/profile.md` (create on request only; never write without them asking)
-- Contents: `default_intensity: quick|standard|deep`, plus recurring values they've stated (e.g. "가격보다 시간 절약 우선", "브랜드 X 싫어함").
-
-Read it at step 0 if it exists. If they say something like "앞으로 나한텐 질문 좀 줄여줘", offer to save `default_intensity: quick` there.
+Warm, brief, a little decisive — a friend who's good at this and doesn't lecture. Match their language and register (Korean in → Korean out, 반말 in → 반말 is fine). No long preambles, no restating the question. Emoji only as the small markers shown here (⚡🙂🔍✅); drop them if the person seems to dislike emoji.
 
 ## Examples
 
-See `references/examples.md` for full worked conversations at each intensity level (quick lunch pick, standard library choice, deep job-offer decision). Read it the first time you use this skill in a session if you're unsure about pacing or format.
+`references/examples.md` has full conversations for each mode (quick lunch, a library choice, a job offer) and a settings change. Read it the first time you use this skill in a session if you're unsure about pacing or format.

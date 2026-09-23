@@ -51,8 +51,10 @@ for (const [name, info] of Object.entries(registry.skills)) {
     if (!last) { flags.push({ type: 'stale', detail: `no benchmark on ${model}` }); continue; }
     if (daysBetween(last.date, now) > policy.staleBenchmarkDays)
       flags.push({ type: 'stale', detail: `${model}: last benchmark ${last.date}` });
-    if (last.delta < policy.minDelta)
-      flags.push({ type: 'caught-up', detail: `${model}: delta ${last.delta} < ${policy.minDelta} (skill ${last.withSkill} vs base ${last.baseline})` });
+    // "caught-up" only makes sense against a no-skill baseline (version-vs-version runs measure the edit, not the skill's value)
+    const vsBase = runs.filter((r) => r.baselineKind !== 'previous-version').at(-1);
+    if (vsBase && vsBase.delta < policy.minDelta)
+      flags.push({ type: 'caught-up', detail: `${model}: delta ${vsBase.delta} < ${policy.minDelta} (skill ${vsBase.withSkill} vs no-skill ${vsBase.baseline})` });
     const prev = runs.at(-2);
     if (prev && prev.withSkill - last.withSkill > policy.regressionDrop)
       flags.push({ type: 'regression', detail: `${model}: ${prev.withSkill} → ${last.withSkill}` });

@@ -12,7 +12,8 @@
         "Does not include a scoring matrix/table",
         "Final answer commits to exactly one option",
         "Includes at least one concrete 'if the situation changes → other option' condition",
-        "Total final answer is short (under ~12 lines)"
+        "Total final answer is short (under ~12 lines)",
+        "Uses plain everyday wording (no 'matrix', 'weight', 'intensity', file paths)"
       ]
     },
     {
@@ -72,6 +73,49 @@
         "Asks at most 3 questions in total",
         "Final answer commits to exactly one plan",
         "Includes one small concrete next step"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "nondev-phone-plan",
+      "prompt": "엄마가 휴대폰 요금제를 바꿀까 말까 고민하셔. 지금 6만9천원짜리 무제한 쓰시는데 알뜰폰이 싸다던데 뭐가 나은지 모르겠대. 엄마 대신 물어보는 거야",
+      "persona": "personas/phone-plan.md",
+      "expected_output": "비개발자 대상: 쉬운 말로 몇 가지 객관식 질문 → 쉬운 비교 → 하나 추천 + 오늘 할 일.",
+      "expectations": [
+        "Asks 1-4 easy multiple-choice questions before recommending",
+        "Explains or avoids technical/telecom jargon (e.g. explains 알뜰폰/번호이동/데이터 GB in plain words)",
+        "No English technical terms like matrix/weight/sensitivity/intensity in user-facing text",
+        "Final answer commits to exactly one option",
+        "Includes a concrete, doable next step suitable for a non-technical person"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "settings-change",
+      "prompt": "앞으로 나한텐 질문 좀 줄여줘. 매번 묻는 거 귀찮아",
+      "persona": "personas/settings.md",
+      "expected_output": "설정 요청으로 인식 → 빠르게로 기본값 저장(가능한 방법) → 친절한 한 줄 확인, 기술 용어·경로 노출 없음.",
+      "expectations": [
+        "Recognizes this as a request to change the default mode (not a decision to make)",
+        "Sets the default to the quick mode without asking an unnecessary question",
+        "Confirmation mentions how to change it back (e.g. '설정' or '꼼꼼히')",
+        "Does not show file paths or technical setting names to the user",
+        "Reply is short (under ~6 lines)"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "mode-arg-gift",
+      "prompt": "꼼꼼히 엄마 생신 선물 뭐 사지. 예산 20만원",
+      "persona": "personas/gift.md",
+      "expected_output": "첫 단어 '꼼꼼히'로 모드 지정 → 후보 제안 + 여러 질문 → 표 + 뒤집히는 조건 → 하나 추천.",
+      "expectations": [
+        "Uses the thorough/꼼꼼히 mode (announces it)",
+        "Proposes no more than 4 candidate gifts",
+        "Asks questions that surface the mom's situation (e.g. hobbies, health/needs)",
+        "Shows a simple comparison table with importance in plain words or stars",
+        "States what would flip the result",
+        "Final answer commits to exactly one gift"
       ]
     }
   ]

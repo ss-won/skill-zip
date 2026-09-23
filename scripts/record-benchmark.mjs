@@ -47,7 +47,8 @@ const row = {
   baseline: +baseline.toFixed(3),
   delta: +(withSkill - baseline).toFixed(3),
   tokensWith: Math.round(pick('with_skill', 'tokens') ?? 0),
-  tokensBaseline: Math.round(pick('without_skill', 'tokens') ?? 0),
+  tokensBaseline: Math.round(pick('without_skill', 'tokens') ?? pick('old_skill', 'tokens') ?? 0),
+  baselineKind: rs.without_skill ? 'no-skill' : 'previous-version',
   note: values.note,
 };
 mkdirSync(join(METRICS_DIR, values.skill), { recursive: true });
