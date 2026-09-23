@@ -1,0 +1,13 @@
+{
+  "$comment": "Source of truth for skill lifecycle. status: active | candidate | deprecated. Edit by hand or via scripts/check-deprecation.mjs --apply.",
+  "trackedModels": [
+    "claude-opus-5-5"
+  ],
+  "policy": {
+    "minDelta": 0.1,
+    "regressionDrop": 0.15,
+    "unusedDays": 60,
+    "staleBenchmarkDays": 90
+  },
+  "skills": {}
+}

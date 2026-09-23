@@ -1,0 +1,12 @@
+{
+  "name": "skill-zip",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "health": "node scripts/check-deprecation.mjs",
+    "usage": "node scripts/collect-usage.mjs --write",
+    "skillzip": "node scripts/skillzip.mjs"
+  }
+}

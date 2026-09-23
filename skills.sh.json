@@ -1,0 +1,11 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Personal",
+      "description": "Everyday helpers tuned to how I work and think.",
+      "skills": []
+    }
+  ]
+}

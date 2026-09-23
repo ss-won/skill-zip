@@ -1,0 +1,31 @@
+# Monthly (and on-demand) skill health check → opens/updates one issue listing deprecation candidates
+# and skills that need re-benchmarking (e.g. after a model release).
+name: skill-health
+on:
+  schedule:
+    - cron: '0 0 1 * *'   # 1st of every month, 09:00 KST
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - id: check
+        run: |
+          set +e
+          node scripts/check-deprecation.mjs > report.md
+          echo "code=$?" >> "$GITHUB_OUTPUT"
+          cat report.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Open or update health issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Skill health report"
+          num=$(gh issue list --state open --search "$title in:title" --json number -q '.[0].number')
+          if [ -n "$num" ]; then gh issue comment "$num" --body-file report.md
+          else gh issue create --title "$title" --body-file report.md; fi
