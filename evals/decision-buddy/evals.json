@@ -117,6 +117,34 @@
         "States what would flip the result",
         "Final answer commits to exactly one gift"
       ]
+    },
+    {
+      "id": 9,
+      "name": "open-gift-request",
+      "prompt": "친구 생일 선물 추천해줘. 5만원 정도. 친구는 게임회사 PM이야",
+      "persona": "personas/friend-gift.md",
+      "expected_output": "후보 없는 열린 요청도 처리. 사람 관련이라 적당히. 직업·하루 일과·이미 가진 것 질문. 날짜/배송을 지금 할 일에 반영.",
+      "expectations": [
+        "Handles the open request (proposes candidates itself; does not refuse or only list many ideas)",
+        "Uses 적당히 (or higher) mode, not 빠르게, despite the low price",
+        "Asks about the friend's daily routine/job context and/or what they already own",
+        "Uses the volunteered detail (game company PM) in the reasoning",
+        "Asks for or accounts for the date and makes '지금 할 일' respect delivery timing",
+        "Final answer commits to exactly one gift"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "carryover-context",
+      "prompt": "[Earlier in this conversation]\nUSER: 11월에 여행 가려는데 교토랑 타이베이 중에 고민이야\nASSISTANT: 둘 다 좋죠! 예산은 어느 정도예요?\nUSER: 항공+숙소 합쳐서 100만원 이내. 맛집보다는 풍경 위주로 보고 싶어\n\n[Now]\nUSER: 아 모르겠다 그냥 골라줘 좀",
+      "persona": "personas/carryover.md",
+      "expected_output": "이전 대화의 후보·예산·선호를 이어받아 다시 묻지 않고 바로 골라줌.",
+      "expectations": [
+        "Does not re-ask the candidates, budget, or scenery-vs-food preference",
+        "Uses the earlier answers (budget 100만원, 풍경 위주, 11월) in the reasoning",
+        "Switches to picking now ('그냥 골라줘') with at most 0-1 questions",
+        "Final answer commits to exactly one destination"
+      ]
     }
   ]
 }

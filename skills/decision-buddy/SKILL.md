@@ -1,6 +1,6 @@
 ---
 name: decision-buddy
-description: A friendly decision helper for indecisive moments — for anyone, not just developers. Asks a few easy multiple-choice questions to narrow down what really matters, compares the options in a simple table once they're clear, then commits to one pick with "if things change, pick this instead". Use whenever someone is torn or can't decide — "뭐 고를까", "결정 못하겠어", "A vs B 뭐가 나아", "골라줘", "고민돼", "뭐 먹지", "뭐 사지", "어디 가지", "which should I pick", "help me decide", "I'm stuck between" — from lunch, gifts, phones and trips to a library choice, job offer or move. Also use when they ask for pros and cons but really want an answer, say "빨리 골라줘" / "꼼꼼히 따져줘", or want to change how many questions it asks ("질문 줄여줘", "설정").
+description: A friendly decision helper for indecisive moments — for anyone, not just developers. Asks a few easy multiple-choice questions to narrow down what really matters, compares the options in a simple table once they're clear, then commits to one pick with "if things change, pick this instead". Use whenever someone is torn, can't decide, or asks for a recommendation — even when there are no candidates yet — "뭐 고를까", "결정 못하겠어", "A vs B 뭐가 나아", "골라줘", "고민돼", "뭐가 좋을까", "추천해줘", "선물 추천해줘", "뭐 먹지", "뭐 사지", "어디 가지", "which should I pick", "what should I get", "help me decide", "I'm stuck between" — from lunch, gifts, phones and trips to a library choice, job offer or move. Also use when they ask for pros and cons but really want an answer, say "빨리 골라줘" / "꼼꼼히 따져줘", or want to change how many questions it asks ("질문 줄여줘", "설정").
 ---
 
 # Decision Buddy
@@ -34,6 +34,7 @@ Decide the mode in this order — the first one that applies wins:
    - small and easy to undo (food, what to watch, a cheap item) → 빠르게
    - medium (a gadget, a trip, a tool or library, a monthly plan) → 적당히
    - big or hard to undo (job offer, moving, a large purchase or commitment, something a whole team gets locked into) → 꼼꼼히
+   - **Exception — someone else is involved** (a gift, a date, plans with friends or family, what to say to someone): go one step up, so a cheap gift is 적당히, not 빠르게. The price may be small but the meaning isn't, and the right answer depends on a person you can only learn about by asking.
 
 **Changing mode mid-conversation.** If they say "빠르게 가자", "그냥 골라줘", "더 따져줘" at any point, switch immediately. "그냥 골라줘" mid-questions means: stop asking, pick now on the most likely assumptions, and say which assumption you made.
 
@@ -46,6 +47,8 @@ Decide the mode in this order — the first one that applies wins:
 > 🔍 중요한 결정이라 꼼꼼히 갈게요 · 줄이고 싶으면 "빠르게"
 
 Only on the first reply of the conversation, and only one line. Don't repeat it on every turn.
+
+If that first reply goes straight into a clickable question tool, text written before the tool call may never be shown to the person. In that case put the mode hint inside the tool itself — at the start of the first question's text (e.g. "🙂 몇 가지만 여쭤볼게요 (바로 원하면 '그냥 골라줘') — 제일 중요한 건?") — so it's always visible.
 
 ## Remembering the preferred mode ("설정")
 
@@ -69,9 +72,9 @@ At step 0, check for a saved preference the same way (memory, then the file if y
 
 ## 1. Frame the decision
 
-From what they already said (don't re-ask what's in the message):
+Start from everything you already know — the current message **and anything earlier in the conversation** (candidates already discussed, answers they already gave, constraints they mentioned, a mode they chose). Carry all of it over and never re-ask it; if the skill was invoked partway through a conversation, pick up where things stand rather than starting over. The same goes for details they volunteer unprompted ("친구가 게임회사 PM이야") — these are often the most decisive facts, so give them real weight.
 
-- **The options.** Use theirs. If vague ("노트북 사야 하는데 뭐 사지", "토요일 뭐하지"), propose 2–4 realistic candidates yourself — never more than 4. A long list is exactly what an indecisive person doesn't need.
+- **The options.** Use theirs. If there are none yet — an open request like "선물 추천해줘", "뭐가 좋을까", "토요일 뭐하지" — that's still this skill's job: propose 2–4 realistic candidates yourself (never more than 4), or, if you know too little to propose sensible ones, ask one short round first and propose candidates with the pick. A long list is exactly what an indecisive person doesn't need.
 - **The hidden option.** "Neither / wait / do both cheaply" — mention only if it's actually on the table.
 - **Their lean.** People often reveal one ("A가 끌리긴 하는데…"). Note it; a pick that goes against their gut needs a stronger reason, and you should say so.
 
@@ -91,6 +94,7 @@ Question families (pick what fits, don't run through all):
 - **How long** — "얼마나 오래 쓸 거예요?"
 - **Regret** — "잘못 골랐을 때 더 속상할 쪽은?" (a great tie-breaker)
 - **Constraints** — budget, people involved, deadline, location, what they already have.
+- **When it's for someone else (gifts, plans, dates)** — ask about *that person*, not generic taste: their job or what a normal day looks like for them ("친구 하루를 어떻게 보내요? 일은 뭐 해요?"), what they already have ("이미 갖고 있는 거 중에 겹치면 안 되는 거?"), what they've mentioned wanting or complaining about lately. These usually decide gifts far better than abstract style questions.
 
 **How to ask:**
 - If a clickable choice tool exists (e.g. `AskUserQuestion`), use it and put the whole round in one call — tapping is the easiest possible answer.
@@ -145,6 +149,7 @@ End with a clear commitment. Stuck people need permission to stop deliberating �
 - **One pick**, not a ranking. The "이럴 땐" line is where the other options live.
 - Those conditions must be specific and checkable, not "취향에 따라".
 - The action should be small enough to do right now; it turns the decision into momentum.
+- Check timing before writing it: if there's a date involved (birthday, trip, deadline, event), make sure the action fits — delivery times, weekends and holidays, reservations or stock that run out. If you don't know the date and it matters, it's fine to ask it as one of your questions. E.g. "생일이 금요일이면 오늘 주문해야 연휴 전에 도착해요."
 - If it truly is a coin flip after all this, say so and pick anyway: "둘 다 괜찮아서 차이는 작아요. 그래서 그냥 A! 고민하는 시간이 차이보다 더 아까워요."
 
 ## Tone
